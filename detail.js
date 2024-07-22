@@ -33,47 +33,51 @@ document.addEventListener('DOMContentLoaded', function() {
 
             countryDetailDiv.innerHTML = `
             <div class="name">
-                ${name}   
+                ${name}
                 <div id="country-info">
                     <div>${flag}</div>
                     <div class="info-details">
-                    ${nativeName}
-                    ${capital}
-                    ${population}
-                    ${region}
-                    ${subregion}
-                    ${area}
-                    ${countryCodeDisplay}
-                    ${languages}
-                    ${currencies}
-                    ${timezones}
+                        ${nativeName}
+                        ${capital}
+                        ${population}
+                        ${region}
+                        ${subregion}
+                        ${area}
+                        ${countryCodeDisplay}
+                        ${languages}
+                        ${currencies}
+                        ${timezones}
                     </div>
                 </div>
             </div>
             `;
 
+            const neighborCountriesDiv = document.getElementById('neighbor-countries');
             if (country.borders && country.borders.length > 0) {
                 fetch(`https://restcountries.com/v3.1/alpha?codes=${country.borders.join(',')}`)
                     .then(response => response.json())
                     .then(neighboringCountries => {
-                        const neighborCountriesDiv = document.getElementById('neighbor-countries');
-                        const neighborFlagsDiv = document.createElement('div');
-                        neighborFlagsDiv.id = 'neighbor-flags';
+                        if (neighboringCountries.length > 0) {
+                            const neighborFlagsDiv = document.createElement('div');
+                            neighborFlagsDiv.id = 'neighbor-flags';
 
-                        neighboringCountries.forEach(neighbor => {
-                            const neighborFlag = document.createElement('img');
-                            neighborFlag.src = neighbor.flags.svg;
-                            neighborFlag.alt = neighbor.name.common;
-                            neighborFlag.title = neighbor.name.common;
-                            neighborFlagsDiv.appendChild(neighborFlag);
-                        });
+                            neighboringCountries.forEach(neighbor => {
+                                const neighborFlag = document.createElement('img');
+                                neighborFlag.src = neighbor.flags.svg;
+                                neighborFlag.alt = neighbor.name.common;
+                                neighborFlag.title = neighbor.name.common;
+                                neighborFlagsDiv.appendChild(neighborFlag);
+                            });
 
-                        neighborCountriesDiv.innerHTML = `
-                            <h2>Neighbour Countries</h2>
-                        `;
-                        neighborCountriesDiv.appendChild(neighborFlagsDiv);
+                            neighborCountriesDiv.innerHTML = `<h2>Neighbour Countries</h2>`;
+                            neighborCountriesDiv.appendChild(neighborFlagsDiv);
+                        } else {
+                            neighborCountriesDiv.style.display = 'none';
+                        }
                     })
                     .catch(error => console.error('Error fetching neighboring countries:', error));
+            } else {
+                neighborCountriesDiv.style.display = 'none';
             }
         })
         .catch(error => console.error('Error fetching country details:', error));
