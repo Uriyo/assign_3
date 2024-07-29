@@ -15,18 +15,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 const flagImg = country.flags ? country.flags.svg : '';
                 const mapUrl = country.maps ? country.maps.googleMaps : '#';
 
+                const now = new Date();
+                const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
+                const formattedDate = formatWithOrdinal(now.getDate()) + ' ' + now.toLocaleDateString('en-GB', optionsDate);
+                const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: true };
+                const formattedTime = now.toLocaleTimeString('en-US', optionsTime);
+
                 countryDiv.innerHTML = `
                 <div class="details-info">    
                     <div class="flag_Img">
                         <img class="flag-img" src="${flagImg}" alt="${country.name.common}">
                     </div>
-                    <div>
-                        <h2>${country.name.common}</h2>
-                        <p>Currency: ${currencyName}</p>
-                        <p>Current date and time: ${new Date().toLocaleString()}</p>
+                    <div class='details'>
+                        <h2 class='sub-heading'>${country.name.common}</h2>
+                        <p class='sub-details'>Currency: ${currencyName}</p>
+                        <p class='sub-details'>Current date and time : ${formattedDate} ${formattedTime}</p>
+
                         <div class="btn">
-                            <button onclick="showMap('${mapUrl}')">Show Map</button>
-                            <button onclick="viewDetail('${country.cca3}')">Detail</button>
+                            <button class="btn-button" onclick="showMap('${mapUrl}')">Show Map</button>
+                            <button class="btn-button2" onclick="viewDetail('${country.cca3}')">Detail</button>
                         </div>
                     </div>
                 </div>
@@ -56,6 +63,12 @@ function showMap(url) {
     } else {
         alert('Map not available');
     }
+}
+
+function formatWithOrdinal(day) {
+    const suffixes = ["th", "st", "nd", "rd"];
+    const v = day % 100;
+    return day + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0]);
 }
 
 function viewDetail(cca3) {

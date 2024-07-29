@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const countryDetailDiv = document.getElementById('country-detail');
 
             const name = country.name.common ? `<h1>${country.name.common}</h1>` : '<h1>Unknown Country</h1>';
-            const flag = country.flags ? `<img src="${country.flags.svg}" alt="${country.name.common}">` : '';
+            const flag = country.flags ? `<img class='flag-img' src="${country.flags.svg}" alt="${country.name.common}">` : '';
             const nativeName = country.name.nativeName ? `<p>Native Name: ${Object.values(country.name.nativeName)[0].common}</p>` : '';
             const capital = country.capital ? `<p>Capital: ${country.capital[0]}</p>` : '';
             const population = country.population ? `<p>Population: ${country.population}</p>` : '';
             const region = country.region ? `<p>Region: ${country.region}</p>` : '';
             const subregion = country.subregion ? `<p>Sub-region: ${country.subregion}</p>` : '';
             const area = country.area ? `<p>Area: ${country.area} Km²</p>` : '';
-            const countryCodeDisplay = country.idd ? `<p>Country Code: +${country.idd.root}${country.idd.suffixes[0]}</p>` : '';
+            const countryCodeDisplay = country.idd ? `<p>Country Code: ${country.idd.root}${country.idd.suffixes[0]}</p>` : '';
             const languages = country.languages ? `<p>Languages: ${Object.values(country.languages).join(', ')}</p>` : '';
             const currencies = country.currencies ? `<p>Currencies: ${Object.values(country.currencies).map(c => c.name).join(', ')}</p>` : '';
             const timezones = country.timezones ? `<p>Timezones: ${country.timezones.join(', ')}</p>` : '';

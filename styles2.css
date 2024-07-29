@@ -5,7 +5,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f4f4f4;
+    background-color: white;
     min-height: 100vh;
 }
 
@@ -13,34 +13,43 @@ body {
     width: 90%;
     max-width: 1200px;
     background-color: white;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    padding: 20px;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+    margin: 20px;
 }
 
 #country-detail {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     text-align: left;
     margin-bottom: 50px;
-    margin-left: 20px;
-    margin-top: 20px;
-
 }
 
 #country-detail img {
-    width: 450px;
+    width: 100%;
+    max-width: 450px;
     height: auto;
-    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.flag-img{
+    margin-right: 50px;
 }
 
 #country-info {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: left;
+    width: 100%;
 }
-.info-details{
+
+.info-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     margin-left: 20px;
+    max-width: 600px;
 }
 
 #country-info h1 {
@@ -54,31 +63,50 @@ body {
 #neighbor-countries {
     text-align: center;
     border: 2px solid #ccc;
-    padding-bottom: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #neighbor-countries h2 {
     margin-bottom: 20px;
-    margin-left: 20px;
-    text-align: left;
 }
 
 #neighbor-flags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
-    margin-left: 10px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
+    gap: 20px;
+    justify-items: center;
 }
 
 #neighbor-flags img {
-    width: 200px;
-    height: auto;
-    margin: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 270px;
+    height: 180px;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); */
 }
 
-.name{
-    margin-right: 60px; 
+@media (min-width: 768px) {
+    #country-detail {
+        flex-direction: row;
+    }
+
+    .info-details {
+        margin-left: 20px;
+    }
+
+    #neighbor-flags {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    }
+}
+
+@media (min-width: 1200px) {
+    #country-detail {
+        justify-content: flex-start;
+    }
+
+    #neighbor-flags {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns for large screens */
+    }
 }
