@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 const now = new Date();
                 const optionsDate = { day: 'numeric', month: 'short', year: 'numeric' };
-                const formattedDate = formatWithOrdinal(now.getDate()) + ' ' + now.toLocaleDateString('en-GB', optionsDate);
+                const formattedDate = formatWithOrdinal(now.getDate()) + ' ' + now.toLocaleDateString('en-GB', optionsDate).replace(/\d+/, ''); 
                 const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: true };
                 const formattedTime = now.toLocaleTimeString('en-US', optionsTime);
 
