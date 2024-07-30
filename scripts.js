@@ -41,7 +41,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 countriesList.appendChild(countryDiv);
             });
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => {
+            console.error('Error fetching data:', error)
+            document.getElementById('error-message').innerText = 'Error fetching data: ' + error.message;
+        });
 
     document.getElementById('search').addEventListener('input', function(event) {
         const searchQuery = event.target.value.toLowerCase();

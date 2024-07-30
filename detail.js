@@ -80,5 +80,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 neighborCountriesDiv.style.display = 'none';
             }
         })
-        .catch(error => console.error('Error fetching country details:', error));
+        .catch(error => {
+            console.error('Error fetching country details:', error);
+            document.getElementById('error-message').innerText = 'Error fetching data: ' + error.message;
+        });
 });
